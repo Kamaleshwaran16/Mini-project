@@ -1,11 +1,11 @@
 function inspectData() {
-  document.getElementById("preview").innerHTML =
-    "<p><b>Columns:</b> Age, Salary, Experience</p><p><b>Rows:</b> 150</p>";
+  document.getElementById("preview").innerText =
+    "Columns: Age, Salary, Experience | Rows: 150";
 }
 
 function autoClean() {
-  document.getElementById("preview").innerHTML =
-    "<p>Missing values removed ✔</p><p>Data normalized ✔</p>";
+  document.getElementById("preview").innerText =
+    "Missing values removed. Data cleaned successfully.";
 }
 
 function startAnalysis() {

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Analysis Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark">
+
+  <div class="dashboard">
+    <h2>Analysis Dashboard</h2>
+
+    <div class="cards">
+      <div class="card">Rows<br><b>150</b></div>
+      <div class="card">Columns<br><b>3</b></div>
+      <div class="card">Missing Values<br><b>0</b></div>
+    </div>
+
+    <div class="charts">
+      <canvas id="barChart"></canvas>
+      <canvas id="pieChart"></canvas>
+    </div>
+
+    <div class="ml-box">
+      <h3>Machine Learning Model</h3>
+      <p>Auto-selected Model: <b>Linear Regression</b></p>
+      <p>Accuracy: <b>92%</b></p>
+      <button onclick="window.location.href='report.html'">
+        Generate Insights
+      </button>
+    </div>
+  </div>
+
+  <script>
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Low', 'Medium', 'High'],
+        datasets: [{
+          label: 'Salary Distribution',
+          data: [30, 70, 50]
+        }]
+      }
+    });
+
+    new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Junior', 'Mid', 'Senior'],
+        datasets: [{
+          data: [40, 60, 50]
+        }]
+      }
+    });
+  </script>
+
+</body>
+</html>
