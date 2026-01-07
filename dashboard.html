@@ -2,54 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Analysis Dashboard</title>
+  <title>Dashboard | ANALYDWO</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="dark">
+<body>
 
-  <div class="dashboard dashboard-fixed">
-    <h2>Analysis Dashboard</h2>
+  <section class="dashboard-hero">
 
-    <!-- Summary Cards -->
-    <div class="cards">
-      <div class="card">
-        Rows<br><b>150</b>
+    <h2 class="dashboard-title">Analysis Dashboard</h2>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span>Rows</span>
+        <h3>150</h3>
       </div>
-      <div class="card">
-        Columns<br><b>3</b>
+      <div class="stat-card">
+        <span>Columns</span>
+        <h3>3</h3>
       </div>
-      <div class="card">
-        Missing Values<br><b>0</b>
+      <div class="stat-card">
+        <span>Missing Values</span>
+        <h3>0</h3>
       </div>
     </div>
 
-    <!-- Charts Section -->
-    <div class="charts-fixed">
-      <div class="chart-box">
+    <!-- Charts -->
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h4>Salary Distribution</h4>
         <canvas id="barChart"></canvas>
       </div>
 
-      <div class="chart-box">
+      <div class="chart-card">
+        <h4>Experience Level</h4>
         <canvas id="pieChart"></canvas>
       </div>
     </div>
 
     <!-- ML Section -->
-    <div class="ml-box">
+    <div class="ml-card">
       <h3>Machine Learning Model</h3>
       <p>Auto-selected Model: <b>Linear Regression</b></p>
       <p>Accuracy: <b>92%</b></p>
+
       <button onclick="window.location.href='report.html'">
-        Generate Insights
+        Generate Insights 🚀
       </button>
     </div>
-  </div>
+
+  </section>
 
   <script>
-    const barCtx = document.getElementById('barChart');
-    new Chart(barCtx, {
+    new Chart(document.getElementById('barChart'), {
       type: 'bar',
       data: {
         labels: ['Low', 'Medium', 'High'],
@@ -65,8 +72,7 @@
       }
     });
 
-    const pieCtx = document.getElementById('pieChart');
-    new Chart(pieCtx, {
+    new Chart(document.getElementById('pieChart'), {
       type: 'pie',
       data: {
         labels: ['Junior', 'Mid', 'Senior'],

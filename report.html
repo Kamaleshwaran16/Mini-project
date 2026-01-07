@@ -1,26 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Final Report</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <title>Final Report | ANALYDWO</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="dark">
 
-  <div class="container">
-    <h2>Final Report</h2>
+<body>
 
-    <ul>
-      <li>Dataset cleaned successfully</li>
-      <li>Strong correlation between experience and salary</li>
-      <li>ML model achieved 92% accuracy</li>
-    </ul>
+  <section class="report-hero">
 
-    <div class="actions">
-      <button>Download PDF</button>
-      <button>View as Webpage</button>
+    <div class="report-card">
+
+      <h2 class="report-title">Final Analysis Report</h2>
+      <p class="report-subtitle">
+        Generated insights based on uploaded dataset
+      </p>
+
+      <!-- Insights -->
+      <div class="report-insights">
+        <div class="insight-item">
+          <span>✔</span>
+          <p>Dataset cleaned successfully without missing values</p>
+        </div>
+
+        <div class="insight-item">
+          <span>✔</span>
+          <p>Strong correlation identified between experience and salary</p>
+        </div>
+
+        <div class="insight-item">
+          <span>✔</span>
+          <p>Machine Learning model achieved <b>92% accuracy</b></p>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="report-actions">
+        <button onclick="alert('PDF downloaded successfully (demo)')">
+          Download PDF 📄
+        </button>
+
+        <button class="secondary" onclick="window.print()">
+          View as Webpage 🌐
+        </button>
+      </div>
+
     </div>
-  </div>
+
+  </section>
 
 </body>
 </html>

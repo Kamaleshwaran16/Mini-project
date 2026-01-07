@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Upload Dataset</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <title>Upload Dataset | ANALYDWO</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="dark">
 
-  <div class="container upload-container">
-    <h2>Upload Dataset</h2>
-    <p class="subtitle">
-      Select a CSV file to inspect, clean, and analyze your data
-    </p>
+<body>
 
-    <input type="file" class="file-input" accept=".csv">
+  <section class="upload-hero">
+    <div class="upload-card">
 
-    <div class="actions">
-      <button onclick="inspectData()">Inspect Data</button>
-      <button onclick="autoClean()">Auto Clean</button>
-      <button onclick="downloadCleaned()">Download Cleaned CSV</button>
-      <button onclick="startAnalysis()" class="primary-btn">
-        Start Analysis
-      </button>
+      <h2 class="upload-title">Upload Dataset</h2>
+      <p class="upload-subtitle">
+        Select a CSV file to inspect, clean, and analyze your data
+      </p>
+
+      <!-- File Upload -->
+      <label class="file-drop">
+        <input type="file" accept=".csv" />
+        <span>📂 Click or Drag & Drop CSV File</span>
+      </label>
+
+      <!-- Action Buttons -->
+      <div class="upload-actions">
+        <button onclick="inspectData()">Inspect Data</button>
+        <button onclick="autoClean()">Auto Clean</button>
+        <button onclick="downloadCleaned()">Download Cleaned CSV</button>
+        <button class="primary" onclick="startAnalysis()">
+          Start Analysis 🚀
+        </button>
+      </div>
+
+      <!-- Output Box -->
+      <div id="preview" class="upload-preview">
+        No file uploaded yet.
+      </div>
+
     </div>
-
-    <div id="preview" class="preview-box">
-      <p>No file uploaded yet.</p>
-    </div>
-  </div>
+  </section>
 
   <script src="js/main.js"></script>
 </body>
