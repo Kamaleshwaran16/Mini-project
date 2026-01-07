@@ -7,20 +7,25 @@
 </head>
 <body class="dark">
 
-  <div class="container">
+  <div class="container upload-container">
     <h2>Upload Dataset</h2>
-    <p>Select a CSV file to inspect and analyze</p>
+    <p class="subtitle">
+      Select a CSV file to inspect, clean, and analyze your data
+    </p>
 
     <input type="file" class="file-input" accept=".csv">
 
     <div class="actions">
       <button onclick="inspectData()">Inspect Data</button>
       <button onclick="autoClean()">Auto Clean</button>
-      <button onclick="startAnalysis()">Start Analysis</button>
+      <button onclick="downloadCleaned()">Download Cleaned CSV</button>
+      <button onclick="startAnalysis()" class="primary-btn">
+        Start Analysis
+      </button>
     </div>
 
     <div id="preview" class="preview-box">
-      No file uploaded yet.
+      <p>No file uploaded yet.</p>
     </div>
   </div>
 
