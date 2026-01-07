@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Dataset</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark">
+
+  <div class="container">
+    <h2>Upload Dataset</h2>
+    <p>Select a CSV file to inspect and analyze</p>
+
+    <input type="file" id="fileInput" accept=".csv" class="file-input">
+
+    <div class="actions">
+      <button onclick="inspectData()">Inspect Data</button>
+      <button onclick="autoClean()">Auto Clean</button>
+      <button onclick="startAnalysis()">Start Analysis</button>
+    </div>
+
+    <div id="preview" class="preview-box">
+      <p>No file uploaded yet.</p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
