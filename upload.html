@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Upload Dataset | ANALYDWO</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <section class="upload-hero">
+    <div class="upload-card">
+
+      <h2 class="upload-title">Upload Dataset</h2>
+      <p class="upload-subtitle">
+        Select a CSV file to inspect, clean, and analyze your data
+      </p>
+
+      <!-- File Upload -->
+      <label class="file-drop">
+        <input type="file" accept=".csv" />
+        <span>📂 Click or Drag & Drop CSV File</span>
+      </label>
+
+      <!-- Action Buttons -->
+      <div class="upload-actions">
+        <button onclick="inspectData()">Inspect Data</button>
+        <button onclick="autoClean()">Auto Clean</button>
+        <button onclick="downloadCleaned()">Download Cleaned CSV</button>
+        <button class="primary" onclick="startAnalysis()">
+          Start Analysis 🚀
+        </button>
+      </div>
+
+      <!-- Output Box -->
+      <div id="preview" class="upload-preview">
+        No file uploaded yet.
+      </div>
+
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

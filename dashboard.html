@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | ANALYDWO</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <section class="dashboard-hero">
+
+    <h2 class="dashboard-title">Analysis Dashboard</h2>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span>Rows</span>
+        <h3>150</h3>
+      </div>
+      <div class="stat-card">
+        <span>Columns</span>
+        <h3>3</h3>
+      </div>
+      <div class="stat-card">
+        <span>Missing Values</span>
+        <h3>0</h3>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h4>Salary Distribution</h4>
+        <canvas id="barChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h4>Experience Level</h4>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+
+    <!-- ML Section -->
+    <div class="ml-card">
+      <h3>Machine Learning Model</h3>
+      <p>Auto-selected Model: <b>Linear Regression</b></p>
+      <p>Accuracy: <b>92%</b></p>
+
+      <button onclick="window.location.href='report.html'">
+        Generate Insights 🚀
+      </button>
+    </div>
+
+  </section>
+
+  <script>
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Low', 'Medium', 'High'],
+        datasets: [{
+          label: 'Salary Distribution',
+          data: [30, 70, 50],
+          backgroundColor: '#38bdf8'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+    new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Junior', 'Mid', 'Senior'],
+        datasets: [{
+          data: [40, 60, 50],
+          backgroundColor: ['#38bdf8', '#f472b6', '#fb923c']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  </script>
+
+</body>
+</html>

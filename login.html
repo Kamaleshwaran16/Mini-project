@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | ANALYDWO</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#020617;
+overflow:hidden;
+color:white;
+}
+
+/* animated gradient background */
+
+body::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,#020617,#0f172a,#020617);
+background-size:300% 300%;
+animation:bgMove 10s infinite;
+z-index:-3;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* floating particles */
+
+.particle{
+position:absolute;
+width:5px;
+height:5px;
+background:#60a5fa;
+border-radius:50%;
+opacity:.8;
+animation:particleMove 10s linear infinite;
+}
+
+@keyframes particleMove{
+0%{transform:translateY(0)}
+100%{transform:translateY(-100vh)}
+}
+
+/* LOGIN CARD */
+
+.login-card{
+
+width:520px;
+padding:70px;
+
+background:rgba(15,23,42,.9);
+
+border-radius:24px;
+
+backdrop-filter:blur(20px);
+
+box-shadow:0 40px 90px rgba(0,0,0,.7);
+
+text-align:center;
+
+position:relative;
+
+animation:cardFade 1s ease;
+}
+
+/* glowing animated border */
+
+.login-card::before{
+content:"";
+position:absolute;
+top:-3px;
+left:-3px;
+right:-3px;
+bottom:-3px;
+
+border-radius:24px;
+
+background:linear-gradient(45deg,#38bdf8,#6366f1,#a78bfa,#fb923c,#38bdf8);
+
+background-size:400%;
+
+z-index:-1;
+
+animation:borderGlow 8s linear infinite;
+}
+
+@keyframes borderGlow{
+0%{background-position:0%}
+100%{background-position:400%}
+}
+
+@keyframes cardFade{
+from{
+opacity:0;
+transform:translateY(50px) scale(.9);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
+/* ANALYDWO TITLE — HIGH VISIBILITY */
+
+.logo{
+
+font-size:46px;
+
+font-weight:900;
+
+letter-spacing:5px;
+
+margin-bottom:15px;
+
+/* bright white base for contrast */
+
+color:#ffffff;
+
+/* neon outline */
+
+text-shadow:
+0 0 5px #38bdf8,
+0 0 10px #38bdf8,
+0 0 20px #38bdf8,
+0 0 40px #60a5fa;
+
+/* subtle glow animation */
+
+animation:logoGlow 2.5s infinite alternate;
+
+}
+
+@keyframes logoGlow{
+from{
+text-shadow:
+0 0 5px #38bdf8,
+0 0 10px #38bdf8,
+0 0 20px #38bdf8;
+}
+to{
+text-shadow:
+0 0 10px #60a5fa,
+0 0 20px #60a5fa,
+0 0 40px #60a5fa,
+0 0 80px #60a5fa;
+}
+}
+
+.subtitle{
+color:#cbd5f5;
+margin-bottom:35px;
+font-size:15px;
+}
+
+/* INPUTS */
+
+input{
+
+width:100%;
+
+padding:15px;
+
+margin-bottom:18px;
+
+border:none;
+
+border-radius:10px;
+
+background:#1e293b;
+
+color:white;
+
+font-size:15px;
+
+transition:.3s;
+
+}
+
+input:focus{
+
+outline:none;
+
+background:#334155;
+
+transform:scale(1.03);
+
+}
+
+/* BUTTON */
+
+button{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:35px;
+
+font-size:16px;
+
+font-weight:bold;
+
+background:linear-gradient(135deg,#38bdf8,#6366f1);
+
+color:#020617;
+
+cursor:pointer;
+
+transition:.3s;
+
+position:relative;
+
+overflow:hidden;
+}
+
+button:hover{
+
+transform:translateY(-4px) scale(1.05);
+
+box-shadow:0 15px 40px rgba(56,189,248,.5);
+
+}
+
+/* ripple click effect */
+
+button::after{
+content:"";
+position:absolute;
+width:0;
+height:0;
+background:rgba(255,255,255,.4);
+border-radius:50%;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+transition:width .4s,height .4s;
+}
+
+button:active::after{
+width:200px;
+height:200px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<script>
+
+/* generate floating particles */
+
+for(let i=0;i<40;i++){
+
+let p=document.createElement("div");
+
+p.className="particle";
+
+p.style.left=Math.random()*100+"%";
+
+p.style.animationDuration=(6+Math.random()*6)+"s";
+
+p.style.opacity=Math.random();
+
+document.body.appendChild(p);
+
+}
+
+</script>
+
+<div class="login-card">
+
+<div class="logo">ANALYDWO</div>
+
+<div class="subtitle">Login to continue</div>
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<script>
+
+function login(){
+
+let user=document.getElementById("username").value;
+
+let pass=document.getElementById("password").value;
+
+if(user==="admin" && pass==="1234"){
+
+window.location.href="index.html";
+
+}
+else{
+
+alert("Invalid login. Use admin / 1234");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
