@@ -1,45 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Upload Dataset | ANALYDWO</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<title>ANALYDWO Dataset Upload</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Segoe UI;
+background:linear-gradient(270deg,#020617,#0f172a,#020617);
+background-size:400% 400%;
+animation:bgMove 10s infinite alternate;
+color:white;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+
+/* MAIN CARD */
+
+.container{
+
+width:750px;
+padding:40px;
+border-radius:18px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:0 20px 40px rgba(0,0,0,0.6);
+
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:25px;
+
+}
+
+
+/* TITLE */
+
+.title{
+
+font-size:28px;
+font-weight:600;
+color:#38bdf8;
+
+}
+
+
+/* FILE UPLOAD */
+
+.file-drop{
+
+width:320px;
+padding:25px;
+border:2px dashed #38bdf8;
+border-radius:10px;
+text-align:center;
+cursor:pointer;
+transition:0.3s;
+
+}
+
+.file-drop:hover{
+
+background:rgba(56,189,248,0.1);
+
+}
+
+.file-drop input{
+
+display:none;
+
+}
+
+
+/* BUTTONS */
+
+.buttons{
+
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
+margin-top:10px;
+
+}
+
+button{
+
+padding:12px 18px;
+border:none;
+border-radius:8px;
+background:linear-gradient(45deg,#38bdf8,#6366f1);
+color:white;
+font-size:14px;
+cursor:pointer;
+transition:0.3s;
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(56,189,248,0.6);
+
+}
+
+
+/* RESULT BOX */
+
+#preview{
+
+width:100%;
+padding:15px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.15);
+background:rgba(0,0,0,0.2);
+text-align:center;
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <section class="upload-hero">
-    <div class="upload-card">
+<div class="container">
 
-      <h2 class="upload-title">Upload Dataset</h2>
-      <p class="upload-subtitle">
-        Select a CSV file to inspect, clean, and analyze your data
-      </p>
+<div class="title">
 
-      <!-- File Upload -->
-      <label class="file-drop">
-        <input type="file" accept=".csv" />
-        <span>📂 Click or Drag & Drop CSV File</span>
-      </label>
+ANALYDWO Data Analyzer
 
-      <!-- Action Buttons -->
-      <div class="upload-actions">
-        <button onclick="inspectData()">Inspect Data</button>
-        <button onclick="autoClean()">Auto Clean</button>
-        <button onclick="downloadCleaned()">Download Cleaned CSV</button>
-        <button class="primary" onclick="startAnalysis()">
-          Start Analysis 🚀
-        </button>
-      </div>
+</div>
 
-      <!-- Output Box -->
-      <div id="preview" class="upload-preview">
-        No file uploaded yet.
-      </div>
 
-    </div>
-  </section>
+<label class="file-drop">
 
-  <script src="js/main.js"></script>
+<input type="file" id="csvFile" accept=".csv">
+
+📂 Click to Upload CSV File
+
+</label>
+
+
+<div class="buttons">
+
+<button onclick="inspectData()">Inspect Data</button>
+
+<button onclick="autoClean()">Clean Dataset</button>
+
+<button onclick="window.location.href='analysis.html'">Start Analysis 🚀</button>
+
+<button onclick="generateReport()">AI Report</button>
+
+<button onclick="downloadReport()">Download Report</button>
+
+</div>
+
+
+<div id="preview">
+
+No file uploaded yet.
+
+</div>
+
+
+</div>
+
+
+<script src="js/main.js"></script>
+
 </body>
 </html>

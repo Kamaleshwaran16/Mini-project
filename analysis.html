@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>ANALYDWO AI Processing</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-family:Segoe UI;
+background:#020617;
+color:white;
+overflow:hidden;
+}
+
+/* PARTICLE BACKGROUND */
+
+canvas{
+position:absolute;
+top:0;
+left:0;
+z-index:0;
+}
+
+/* MAIN CONTENT */
+
+.container{
+position:relative;
+z-index:2;
+text-align:center;
+}
+
+/* TITLE */
+
+.title{
+font-size:36px;
+color:#38bdf8;
+margin-bottom:15px;
+}
+
+/* AI TEXT */
+
+.text{
+font-size:18px;
+opacity:0.8;
+margin-bottom:30px;
+}
+
+/* LOADER */
+
+.loader{
+width:90px;
+height:90px;
+border-radius:50%;
+border:8px solid rgba(255,255,255,0.1);
+border-top:8px solid #38bdf8;
+animation:spin 1s linear infinite;
+margin:auto;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+
+/* PROGRESS BAR */
+
+.progress{
+margin-top:35px;
+width:350px;
+height:6px;
+background:#1e293b;
+border-radius:10px;
+overflow:hidden;
+}
+
+.bar{
+height:100%;
+width:0%;
+background:#38bdf8;
+animation:load 4s linear forwards;
+}
+
+@keyframes load{
+0%{width:0%}
+100%{width:100%}
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<canvas id="particles"></canvas>
+
+
+<div class="container">
+
+<div class="title">ANALYDWO AI</div>
+
+<div class="text">AI analyzing dataset...</div>
+
+<div class="loader"></div>
+
+<div class="progress">
+<div class="bar"></div>
+</div>
+
+</div>
+
+
+<script>
+
+/* AUTO REDIRECT */
+
+setTimeout(function(){
+
+window.location.href="dashboard.html"
+
+},4000)
+
+
+
+/* PARTICLE BACKGROUND */
+
+const canvas=document.getElementById("particles")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+for(let i=0;i<120;i++){
+
+particles.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+d:Math.random()*1
+
+})
+
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ctx.fillStyle="#38bdf8"
+
+for(let i=0;i<particles.length;i++){
+
+let p=particles[i]
+
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true)
+ctx.fill()
+
+p.y+=p.d
+
+if(p.y>canvas.height){
+p.y=0
+}
+
+}
+
+requestAnimationFrame(draw)
+
+}
+
+draw()
+
+</script>
+
+
+</body>
+</html>
