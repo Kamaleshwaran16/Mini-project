@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import pandas as pd
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -8,6 +9,9 @@ CORS(app)
 data = None
 
 
+# =========================
+# Home Route
+# =========================
 @app.route("/")
 def home():
     return "ANALYDWO Backend Running"
@@ -146,7 +150,8 @@ def ask():
 
 
 # =========================
-# Run Server
+# Run Server (Render Compatible)
 # =========================
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
