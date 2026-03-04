@@ -136,32 +136,47 @@ AI summary will appear here after loading report.
 
 <script>
 
+const API_URL = "https://mini-project-35ij.onrender.com"
+
+let avgChart = null
+let distChart = null
+
+
 async function loadReport(){
 
-let res=await fetch("http://127.0.0.1:5000/analyze")
-let data=await res.json()
+try{
 
-document.getElementById("rows").innerText=data.rows
-document.getElementById("cols").innerText=data.columns
+let res = await fetch(API_URL + "/analyze")
+let data = await res.json()
 
-
-let labels=Object.keys(data.averages)
-let values=Object.values(data.averages)
+document.getElementById("rows").innerText = data.rows
+document.getElementById("cols").innerText = data.columns
 
 
-new Chart(document.getElementById("avgChart"),{
+let labels = Object.keys(data.averages)
+let values = Object.values(data.averages)
+
+
+/* Destroy old charts if reloaded */
+
+if(avgChart) avgChart.destroy()
+if(distChart) distChart.destroy()
+
+
+avgChart = new Chart(document.getElementById("avgChart"),{
 type:"bar",
 data:{
 labels:labels,
 datasets:[{
 label:"Average Values",
-data:values
+data:values,
+backgroundColor:"#4cc9ff"
 }]
 }
 })
 
 
-new Chart(document.getElementById("distChart"),{
+distChart = new Chart(document.getElementById("distChart"),{
 type:"pie",
 data:{
 labels:labels,
@@ -180,10 +195,17 @@ insights.innerHTML+=`<li>Average ${l} is ${values[i]}</li>`
 })
 
 
-document.getElementById("explanation").innerText=
+document.getElementById("explanation").innerText =
 `The dataset contains ${data.rows} records and ${data.columns} columns. 
 Average values were calculated for numerical fields. 
 These insights help understand the distribution and trends in the dataset.`
+
+}
+catch(err){
+
+alert("Failed to load analysis report")
+
+}
 
 }
 
@@ -191,15 +213,15 @@ These insights help understand the distribution and trends in the dataset.`
 
 async function downloadReport(){
 
-let res=await fetch("http://127.0.0.1:5000/report")
-let data=await res.json()
+let res = await fetch(API_URL + "/report")
+let data = await res.json()
 
-let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"})
-let url=URL.createObjectURL(blob)
+let blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"})
+let url = URL.createObjectURL(blob)
 
-let a=document.createElement("a")
-a.href=url
-a.download="analysis_report.json"
+let a = document.createElement("a")
+a.href = url
+a.download = "analysis_report.json"
 a.click()
 
 }

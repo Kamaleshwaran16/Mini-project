@@ -1,43 +1,57 @@
 let selectedFile = null;
 
+// Backend URL (Render)
+const API_URL = "https://mini-project-35ij.onrender.com";
+
 
 // Detect CSV file
 document.getElementById("csvFile").addEventListener("change", function(e){
 
-selectedFile = e.target.files[0]
+    selectedFile = e.target.files[0];
 
-document.getElementById("preview").innerHTML =
-"File Selected: <b>"+selectedFile.name+"</b>"
+    if(!selectedFile){
+        document.getElementById("preview").innerHTML = "No file selected";
+        return;
+    }
 
-})
+    document.getElementById("preview").innerHTML =
+    "File Selected: <b>"+selectedFile.name+"</b>";
+
+});
 
 
 
 // Upload / Inspect
 function inspectData(){
 
-let formData = new FormData()
+    if(!selectedFile){
+        alert("Please select a CSV file first");
+        return;
+    }
 
-formData.append("file",selectedFile)
+    let formData = new FormData();
+    formData.append("file",selectedFile);
 
-fetch("http://127.0.0.1:5000/upload",{
+    fetch(API_URL + "/upload",{
+        method:"POST",
+        body:formData
+    })
 
-method:"POST",
-body:formData
+    .then(res=>res.json())
 
-})
+    .then(data=>{
 
-.then(res=>res.json())
+        document.getElementById("preview").innerHTML =
 
-.then(data=>{
+        `Rows: ${data.rows}<br>
+        Columns: ${data.columns}<br>
+        Missing: ${data.missing_values}`;
 
-document.getElementById("preview").innerHTML =
+    })
 
-`Rows: ${data.rows}<br>
-Columns: ${data.columns}<br>
-Missing: ${data.missing_values}`
-
-})
+    .catch(err=>{
+        document.getElementById("preview").innerHTML = "Upload failed";
+    });
 
 }
 
@@ -46,20 +60,19 @@ Missing: ${data.missing_values}`
 // Clean
 function autoClean(){
 
-fetch("http://127.0.0.1:5000/clean",{
+    fetch(API_URL + "/clean",{
+        method:"POST"
+    })
 
-method:"POST"
+    .then(res=>res.json())
 
-})
+    .then(data=>{
+        document.getElementById("preview").innerHTML = data.message;
+    })
 
-.then(res=>res.json())
-
-.then(data=>{
-
-document.getElementById("preview").innerHTML =
-data.message
-
-})
+    .catch(()=>{
+        document.getElementById("preview").innerHTML = "Cleaning failed";
+    });
 
 }
 
@@ -68,34 +81,42 @@ data.message
 // Chart
 function startAnalysis(){
 
-fetch("http://127.0.0.1:5000/report")
+    fetch(API_URL + "/report")
 
-.then(res=>res.json())
+    .then(res=>res.json())
 
-.then(data=>{
+    .then(data=>{
 
-document.getElementById("preview").innerHTML =
-`<canvas id="chart"></canvas>`
+        if(!data.averages){
+            document.getElementById("preview").innerHTML = "No analysis data available";
+            return;
+        }
 
-let labels = Object.keys(data.averages)
+        document.getElementById("preview").innerHTML =
+        `<canvas id="chart"></canvas>`;
 
-let values = Object.values(data.averages)
+        let labels = Object.keys(data.averages);
+        let values = Object.values(data.averages);
 
-new Chart(document.getElementById("chart"),{
+        new Chart(document.getElementById("chart"),{
 
-type:"bar",
+            type:"bar",
 
-data:{
-labels:labels,
-datasets:[{
-label:"Average Values",
-data:values
-}]
-}
+            data:{
+                labels:labels,
+                datasets:[{
+                    label:"Average Values",
+                    data:values
+                }]
+            }
 
-})
+        });
 
-})
+    })
+
+    .catch(()=>{
+        document.getElementById("preview").innerHTML = "Analysis failed";
+    });
 
 }
 
@@ -104,27 +125,33 @@ data:values
 // AI Report
 function generateReport(){
 
-fetch("http://127.0.0.1:5000/report")
+    fetch(API_URL + "/report")
 
-.then(res=>res.json())
+    .then(res=>res.json())
 
-.then(data=>{
+    .then(data=>{
 
-let insights=""
+        let insights="";
 
-data.insights.forEach(i=>{
+        if(data.insights){
+            data.insights.forEach(i=>{
+                insights += "<li>"+i+"</li>";
+            });
+        }else{
+            insights = "<li>No AI insights available</li>";
+        }
 
-insights += "<li>"+i+"</li>"
+        document.getElementById("preview").innerHTML =
+        `
+        <h3>AI Insights</h3>
+        <ul>${insights}</ul>
+        `;
 
-})
+    })
 
-document.getElementById("preview").innerHTML =
-`
-<h3>AI Insights</h3>
-<ul>${insights}</ul>
-`
-
-})
+    .catch(()=>{
+        document.getElementById("preview").innerHTML = "Report generation failed";
+    });
 
 }
 
@@ -133,22 +160,26 @@ document.getElementById("preview").innerHTML =
 // Download report
 function downloadReport(){
 
-fetch("http://127.0.0.1:5000/report")
+    fetch(API_URL + "/report")
 
-.then(res=>res.json())
+    .then(res=>res.json())
 
-.then(data=>{
+    .then(data=>{
 
-let blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"})
+        let blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
 
-let a=document.createElement("a")
+        let a=document.createElement("a");
 
-a.href=URL.createObjectURL(blob)
+        a.href=URL.createObjectURL(blob);
 
-a.download="report.json"
+        a.download="analysis_report.json";
 
-a.click()
+        a.click();
 
-})
+    })
+
+    .catch(()=>{
+        alert("Download failed");
+    });
 
 }

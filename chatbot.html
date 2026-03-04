@@ -103,6 +103,9 @@ ANALYDWO Data Assistant
 
 <script>
 
+const API_URL = "https://mini-project-35ij.onrender.com"
+
+
 async function sendQuestion(){
 
 let input = document.getElementById("question")
@@ -116,14 +119,20 @@ chatBox.innerHTML += `<div class="user">${question}</div>`
 
 input.value=""
 
-let response = await fetch("http://127.0.0.1:5000/ask",{
+try{
+
+let response = await fetch(API_URL + "/ask",{
+
 method:"POST",
+
 headers:{
 "Content-Type":"application/json"
 },
+
 body:JSON.stringify({
 question:question
 })
+
 })
 
 let data = await response.json()
@@ -133,6 +142,24 @@ chatBox.innerHTML += `<div class="bot">${data.answer}</div>`
 chatBox.scrollTop = chatBox.scrollHeight
 
 }
+catch{
+
+chatBox.innerHTML += `<div class="bot">Server error. Please try again.</div>`
+
+}
+
+}
+
+
+/* ENTER KEY SUPPORT */
+
+document.getElementById("question").addEventListener("keypress",function(e){
+
+if(e.key === "Enter"){
+sendQuestion()
+}
+
+})
 
 </script>
 

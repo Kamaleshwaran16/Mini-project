@@ -123,9 +123,7 @@ animation:load 4s linear forwards;
 /* AUTO REDIRECT */
 
 setTimeout(function(){
-
-window.location.href="dashboard.html"
-
+    window.location.href="dashboard.html"
 },4000)
 
 
@@ -135,8 +133,13 @@ window.location.href="dashboard.html"
 const canvas=document.getElementById("particles")
 const ctx=canvas.getContext("2d")
 
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
+function resizeCanvas(){
+    canvas.width=window.innerWidth
+    canvas.height=window.innerHeight
+}
+
+resizeCanvas()
+window.addEventListener("resize",resizeCanvas)
 
 let particles=[]
 
@@ -147,7 +150,7 @@ particles.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 r:Math.random()*2,
-d:Math.random()*1
+d:Math.random()*1+0.5
 
 })
 
@@ -171,6 +174,7 @@ p.y+=p.d
 
 if(p.y>canvas.height){
 p.y=0
+p.x=Math.random()*canvas.width
 }
 
 }
