@@ -1,130 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ANALYDWO | Data Analysis Platform</title>
+<meta charset="UTF-8">
+<title>Login | ANALYDWO</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+<style>
 
-    body {
-      background: linear-gradient(120deg, #020617, #0f172a);
-      height: 100vh;
-      overflow: hidden;
-      color: #e5e7eb;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
 
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#020617;
+overflow:hidden;
+color:white;
+}
 
-    .glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(56,189,248,0.4), transparent 60%);
-      top: -200px;
-      left: -200px;
-      animation: float 8s infinite alternate ease-in-out;
-    }
+/* animated gradient background */
 
-    @keyframes float {
-      to {
-        transform: translate(300px, 300px);
-      }
-    }
+body::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,#020617,#0f172a,#020617);
+background-size:300% 300%;
+animation:bgMove 10s infinite;
+z-index:-3;
+}
 
-    .content {
-      max-width: 900px;
-      padding: 40px;
-      animation: fadeUp 1.2s ease;
-      z-index: 2;
-    }
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+/* floating particles */
 
-    h1 {
-      font-size: 4.5rem;
-      letter-spacing: 6px;
-      background: linear-gradient(90deg, #38bdf8, #a78bfa, #fb923c);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
-    }
+.particle{
+position:absolute;
+width:5px;
+height:5px;
+background:#60a5fa;
+border-radius:50%;
+opacity:.8;
+animation:particleMove 10s linear infinite;
+}
 
-    .tagline {
-      font-size: 1.3rem;
-      color: #cbd5f5;
-      margin-bottom: 20px;
-    }
+@keyframes particleMove{
+0%{transform:translateY(0)}
+100%{transform:translateY(-100vh)}
+}
 
-    .desc {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 40px;
-    }
+/* LOGIN CARD */
 
-    .btn {
-      display: inline-block;
-      padding: 16px 48px;
-      border-radius: 40px;
-      background: linear-gradient(135deg, #38bdf8, #6366f1);
-      color: #020617;
-      font-size: 1.1rem;
-      font-weight: bold;
-      text-decoration: none;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+.login-card{
 
-    .btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 50px rgba(56,189,248,0.45);
-    }
+width:520px;
+padding:70px;
 
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 3rem;
-      }
-    }
-  </style>
+background:rgba(15,23,42,.9);
+
+border-radius:24px;
+
+backdrop-filter:blur(20px);
+
+box-shadow:0 40px 90px rgba(0,0,0,.7);
+
+text-align:center;
+
+position:relative;
+
+animation:cardFade 1s ease;
+}
+
+/* glowing animated border */
+
+.login-card::before{
+content:"";
+position:absolute;
+top:-3px;
+left:-3px;
+right:-3px;
+bottom:-3px;
+
+border-radius:24px;
+
+background:linear-gradient(45deg,#38bdf8,#6366f1,#a78bfa,#fb923c,#38bdf8);
+
+background-size:400%;
+
+z-index:-1;
+
+animation:borderGlow 8s linear infinite;
+}
+
+@keyframes borderGlow{
+0%{background-position:0%}
+100%{background-position:400%}
+}
+
+@keyframes cardFade{
+from{
+opacity:0;
+transform:translateY(50px) scale(.9);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
+/* ANALYDWO TITLE — HIGH VISIBILITY */
+
+.logo{
+
+font-size:46px;
+
+font-weight:900;
+
+letter-spacing:5px;
+
+margin-bottom:15px;
+
+/* bright white base for contrast */
+
+color:#ffffff;
+
+/* neon outline */
+
+text-shadow:
+0 0 5px #38bdf8,
+0 0 10px #38bdf8,
+0 0 20px #38bdf8,
+0 0 40px #60a5fa;
+
+/* subtle glow animation */
+
+animation:logoGlow 2.5s infinite alternate;
+
+}
+
+@keyframes logoGlow{
+from{
+text-shadow:
+0 0 5px #38bdf8,
+0 0 10px #38bdf8,
+0 0 20px #38bdf8;
+}
+to{
+text-shadow:
+0 0 10px #60a5fa,
+0 0 20px #60a5fa,
+0 0 40px #60a5fa,
+0 0 80px #60a5fa;
+}
+}
+
+.subtitle{
+color:#cbd5f5;
+margin-bottom:35px;
+font-size:15px;
+}
+
+/* INPUTS */
+
+input{
+
+width:100%;
+
+padding:15px;
+
+margin-bottom:18px;
+
+border:none;
+
+border-radius:10px;
+
+background:#1e293b;
+
+color:white;
+
+font-size:15px;
+
+transition:.3s;
+
+}
+
+input:focus{
+
+outline:none;
+
+background:#334155;
+
+transform:scale(1.03);
+
+}
+
+/* BUTTON */
+
+button{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:35px;
+
+font-size:16px;
+
+font-weight:bold;
+
+background:linear-gradient(135deg,#38bdf8,#6366f1);
+
+color:#020617;
+
+cursor:pointer;
+
+transition:.3s;
+
+position:relative;
+
+overflow:hidden;
+}
+
+button:hover{
+
+transform:translateY(-4px) scale(1.05);
+
+box-shadow:0 15px 40px rgba(56,189,248,.5);
+
+}
+
+/* ripple click effect */
+
+button::after{
+content:"";
+position:absolute;
+width:0;
+height:0;
+background:rgba(255,255,255,.4);
+border-radius:50%;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+transition:width .4s,height .4s;
+}
+
+button:active::after{
+width:200px;
+height:200px;
+}
+
+</style>
+
 </head>
 
 <body>
 
-  <section class="hero">
-    <div class="glow"></div>
+<script>
 
-    <div class="content">
-      <h1>ANALYDWO</h1>
-      <p class="tagline">
-        Smart Data Analysis • Machine Learning • Insightful Reports
-      </p>
-      <p class="desc">
-        Upload your dataset, analyze trends, apply machine learning models,
-        and generate professional reports with ease.
-      </p>
-      <a href="upload.html" class="btn">Get Started 🚀</a>
-    </div>
-  </section>
+/* generate floating particles */
+
+for(let i=0;i<40;i++){
+
+let p=document.createElement("div");
+
+p.className="particle";
+
+p.style.left=Math.random()*100+"%";
+
+p.style.animationDuration=(6+Math.random()*6)+"s";
+
+p.style.opacity=Math.random();
+
+document.body.appendChild(p);
+
+}
+
+</script>
+
+<div class="login-card">
+
+<div class="logo">ANALYDWO</div>
+
+<div class="subtitle">Login to continue</div>
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<script>
+
+function login(){
+
+let user=document.getElementById("username").value;
+
+let pass=document.getElementById("password").value;
+
+if(user==="admin" && pass==="1234"){
+
+window.location.href="home.html";
+
+}
+else{
+
+alert("Invalid login. Use admin / 1234");
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
